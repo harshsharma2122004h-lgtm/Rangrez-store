@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rangrez — Jaipur Hand Block-Print Fabric, Kurti, Shirts & Totes</title>
+<meta name="description" content="Rangrez — authentic Jaipur hand block-printed cotton fabric, kurtis, printed shirts and totes. Pan-India shipping, COD available, GST invoice included.">
+<meta name="keywords" content="Jaipur block print, cotton fabric online, printed kurti, tote bag Jaipur, printed shirt, Bagru print, Sanganeri print">
+<meta property="og:title" content="Rangrez — Jaipur Hand Block-Print Fabric & Apparel">
+<meta property="og:description" content="Authentic Jaipur hand block-printed fabric, kurtis, shirts and totes — shipped across India.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='8' fill='%23d85b78'/%3E%3Ccircle cx='20' cy='20' r='10' fill='%23fffaf6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+  :root{
+    --rani:#D85B78; --rani-deep:#B83F5C; --mustard:#C79A45; --teal:#168A55;
+    --ink:#131A2A; --ink-soft:#70717A; --ivory:#FFFAF6; --paper:#F7EEE8;
+    --line:#E7DCD6; --green:#168A55; --rust:#B83F5C; --navy:#131A2A; --navy2:#1D2740;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{ font-family:'DM Sans', sans-serif; background:var(--ivory); color:var(--ink); -webkit-font-smoothing:antialiased; padding-bottom:70px;}
+  h1,h2,h3{ font-family:'Playfair Display', serif; font-weight:600; letter-spacing:-0.01em; }
+  button{ font-family:inherit; }
+  a{ color:inherit; }
+
+  .stampline{ height:8px; background:linear-gradient(90deg, var(--rani), var(--mustard)); }
+  .announce{ background:var(--navy); color:#fff; text-align:center; padding:7px 12px; font-size:11.5px; letter-spacing:0.02em; }
+
+  header{ background:var(--ink); color:var(--ivory); position:sticky; top:0; z-index:35; }
+  .topbar{ display:flex; align-items:center; gap:16px; padding:16px 5vw; flex-wrap:wrap; }
+  .logo-wrap{ display:flex; align-items:center; gap:10px; flex:none; }
+  .logo-icon{ width:38px; height:38px; flex:none; }
+  .logo-text .brand-name{ font-size:22px; line-height:1; color:var(--ivory); }
+  .logo-text .brand-sub{ font-size:10.5px; color:#C9B9A6; letter-spacing:0.02em; margin-top:2px; }
+
+
+  .search-wrap{ flex:1; min-width:180px; position:relative; display:flex; }
+  .search-wrap input{
+    width:100%; border:none; border-radius:3px; padding:10px 40px 10px 14px; font-size:14px;
+    font-family:inherit; background:var(--ivory); color:var(--ink);
+  }
+  .search-wrap .search-icon{ position:absolute; right:12px; top:50%; transform:translateY(-50%); font-size:14px; opacity:0.6; }
+
+  .header-cart{
+    flex:none; background:var(--mustard); color:var(--ink); border:none; border-radius:3px;
+    padding:10px 14px; font-weight:600; font-size:13.5px; cursor:pointer; display:flex; align-items:center; gap:6px;
+  }
+  .header-track{
+    flex:none; background:none; color:var(--ivory); border:1px solid rgba(255,255,255,0.35); border-radius:3px;
+    padding:10px 14px; font-weight:600; font-size:13.5px; cursor:pointer;
+  }
+
+  .banner{ background:linear-gradient(135deg, var(--rani) 0%, var(--rani-deep) 100%); color:var(--ivory); padding:26px 5vw 22px; }
+  .banner h1{ font-size:clamp(21px,4vw,30px); max-width:560px; line-height:1.25; color:var(--ivory); }
+  .banner p{ font-size:13.5px; color:#F1D3DC; margin-top:8px; max-width:480px; line-height:1.5; }
+  .banner-badges{ display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
+  .banner-badges span{ background:rgba(255,255,255,0.14); padding:6px 12px; border-radius:20px; font-size:11.5px; font-weight:600; }
+
+  .trust-row{ display:flex; gap:14px; overflow-x:auto; padding:16px 5vw; background:var(--paper); border-bottom:1px solid var(--line); }
+  .trust-card{ flex:1; min-width:160px; background:#fff; border:1px solid var(--line); border-radius:8px; padding:12px 14px; font-size:11.5px; color:var(--ink-soft); display:flex; flex-direction:column; gap:2px; }
+  .trust-card b{ font-size:13px; color:var(--ink); font-family:'DM Sans'; }
+
+  .filters{
+    display:flex; gap:8px; overflow-x:auto; padding:14px 5vw; background:var(--paper);
+    border-bottom:1px solid var(--line);
+  }
+  .filter-btn{
+    flex:none; background:none; border:1px solid var(--rani); color:var(--rani-deep);
+    padding:7px 15px; border-radius:16px; font-size:13px; font-weight:600; cursor:pointer;
+    white-space:nowrap; transition:all .15s ease; background:#fff;
+  }
+  .filter-btn.active{ background:var(--rani); color:#fff; border-color:var(--rani); }
+
+  main{ padding:22px 5vw 40px; max-width:1150px; margin:0 auto; }
+  .grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(230px,1fr)); gap:20px; }
+  .card{ background:#fff; border:1px solid var(--line); display:flex; flex-direction:column; overflow:hidden; border-radius:8px; box-shadow:0 1px 3px rgba(19,26,42,0.06); transition:box-shadow .15s ease, transform .15s ease; }
+  .card:hover{ box-shadow:0 6px 18px rgba(19,26,42,0.1); transform:translateY(-2px); }
+  .card img{ width:100%; height:170px; object-fit:cover; display:block; background:#eee0c4; }
+  .card-body{ padding:14px 16px 16px; display:flex; flex-direction:column; gap:7px; flex:1; }
+  .sku-tag{ font-size:10px; color:var(--ink-soft); letter-spacing:0.03em; font-family:monospace; }
+  .stock-tag{ font-size:11px; font-weight:600; }
+  .stock-tag.ok{ color:var(--teal); }
+  .stock-tag.low{ color:var(--rust); }
+  .stock-tag.out{ color:var(--rust); }
+  .card.out-of-stock img{ opacity:0.5; }
+  .add-btn:disabled{ background:var(--ink-soft); cursor:not-allowed; }
+  .qty-row.disabled{ opacity:0.5; pointer-events:none; }
+  .fabric-name{ font-size:16px; }
+  .fabric-desc{ font-size:12.5px; color:var(--ink-soft); line-height:1.4; }
+  .price{ font-family:'Fraunces'; font-size:18px; margin-top:2px; color:var(--rani-deep); }
+  .price small{ font-family:'Work Sans'; font-size:12px; color:var(--ink-soft); font-weight:500; }
+
+  .qty-row{ display:flex; align-items:center; justify-content:space-between; border:1px solid var(--rani); margin-top:auto; border-radius:3px; }
+  .qty-row button{ background:none; border:none; width:34px; height:36px; font-size:16px; color:var(--rani-deep); cursor:pointer; font-weight:600; }
+  .qty-row button:hover{ background:rgba(166,35,75,0.08); }
+  .qty-row .qty-val{ font-size:13.5px; font-weight:600; }
+  .qty-row .qty-val small{ font-weight:500; color:var(--ink-soft); }
+
+  .add-btn{ background:var(--rani); color:#fff; border:none; padding:10px 0; font-weight:600; font-size:13.5px; cursor:pointer; transition:background .15s ease; border-radius:3px; }
+  .add-btn:hover{ background:var(--rani-deep); }
+  .add-btn.added{ background:var(--teal); }
+
+  .no-results{ color:var(--ink-soft); font-size:14px; padding:30px 0; text-align:center; grid-column:1/-1; }
+
+  .cart-fab{
+    position:fixed; right:20px; bottom:20px; background:var(--mustard); color:var(--ink);
+    border:none; border-radius:50px; padding:14px 20px; font-weight:600; font-size:14px;
+    box-shadow:0 6px 20px rgba(36,27,34,0.3); cursor:pointer; z-index:30;
+    display:flex; align-items:center; gap:8px;
+  }
+  .cart-fab .badge{ background:var(--rani-deep); color:#fff; border-radius:50%; width:20px; height:20px; display:inline-flex; align-items:center; justify-content:center; font-size:11.5px; }
+
+  .wa-fab{
+    position:fixed; left:20px; bottom:20px; background:var(--green); color:#fff; border:none;
+    border-radius:50%; width:52px; height:52px; font-size:22px; cursor:pointer; z-index:30;
+    box-shadow:0 6px 20px rgba(0,0,0,0.2); display:flex; align-items:center; justify-content:center; text-decoration:none;
+  }
+
+  .overlay{ position:fixed; inset:0; background:rgba(36,27,34,0.45); opacity:0; pointer-events:none; transition:opacity .2s ease; z-index:40; }
+  .overlay.open{ opacity:1; pointer-events:auto; }
+  .drawer{
+    position:fixed; top:0; right:0; height:100%; width:min(400px,92vw); background:var(--ivory); z-index:50;
+    box-shadow:-8px 0 30px rgba(0,0,0,0.15); transform:translateX(100%); transition:transform .25s ease;
+    display:flex; flex-direction:column;
+  }
+  .drawer.open{ transform:translateX(0); }
+  .drawer-head{ padding:20px 20px 16px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; }
+  .drawer-close{ background:none; border:none; font-size:22px; cursor:pointer; color:var(--ink-soft); }
+  .drawer-items{ flex:1; overflow-y:auto; padding:12px 20px; }
+  .drawer-item{ display:flex; justify-content:space-between; gap:10px; padding:13px 0; border-bottom:1px solid var(--line); }
+  .drawer-item .name{ font-size:14px; font-weight:600; }
+  .drawer-item .sub{ font-size:12px; color:var(--ink-soft); margin-top:2px; }
+  .drawer-item .amt{ font-size:14px; font-weight:600; white-space:nowrap; }
+  .remove-x{ background:none; border:none; color:var(--rust); font-size:11.5px; cursor:pointer; margin-top:5px; text-decoration:underline; }
+  .empty-cart{ color:var(--ink-soft); font-size:14px; padding:26px 0; text-align:center; }
+  .drawer-foot{ padding:16px 20px 20px; border-top:1px solid var(--line); }
+
+  .coupon-row{ display:flex; gap:8px; margin-bottom:8px; }
+  .coupon-row input{ flex:1; border:1px solid var(--line); background:#fff; padding:9px 10px; font-size:13px; border-radius:3px; font-family:inherit; text-transform:uppercase; }
+  .coupon-row button{ background:var(--teal); color:#fff; border:none; padding:0 14px; border-radius:3px; font-weight:600; font-size:12.5px; cursor:pointer; }
+  .coupon-msg{ font-size:11.5px; margin-bottom:10px; min-height:14px; }
+  .coupon-msg.ok{ color:var(--teal); }
+  .coupon-msg.err{ color:var(--rust); }
+
+  .summary-box{ font-size:13.5px; }
+  .summary-row{ display:flex; justify-content:space-between; padding:4px 0; color:var(--ink-soft); }
+  .summary-row.grand{ color:var(--ink); font-weight:700; border-top:1px solid var(--line); margin-top:6px; padding-top:10px; }
+  .summary-row.grand b{ font-family:'Fraunces'; font-size:19px; }
+  .summary-note{ font-size:11px; color:var(--ink-soft); margin-top:6px; }
+
+  .primary-btn{ display:block; width:100%; text-align:center; background:var(--rani); color:#fff; border:none; padding:12px 0; border-radius:3px; font-weight:600; font-size:14px; cursor:pointer; margin-top:12px; }
+  .primary-btn:hover{ background:var(--rani-deep); }
+  .secondary-btn{ display:block; width:100%; text-align:center; background:none; color:var(--rani); border:1px solid var(--rani); padding:11px 0; border-radius:3px; font-weight:600; font-size:14px; cursor:pointer; margin-top:10px; }
+
+  .modal{
+    position:fixed; top:50%; left:50%; transform:translate(-50%,-46%); width:min(440px,92vw);
+    background:var(--ivory); z-index:60; border-radius:4px; opacity:0; pointer-events:none;
+    transition:opacity .2s ease, transform .2s ease; max-height:88vh; overflow-y:auto;
+  }
+  .modal.open{ opacity:1; pointer-events:auto; transform:translate(-50%,-50%); }
+  .modal-head{ padding:20px 22px 10px; }
+  .modal-head h2{ font-size:20px; }
+  .modal-body{ padding:6px 22px 22px; display:flex; flex-direction:column; gap:12px; }
+  .field label{ display:block; font-size:12.5px; font-weight:600; margin-bottom:5px; color:var(--ink-soft); }
+  .field input, .field textarea, .field select{
+    width:100%; border:1px solid var(--line); background:#fff; padding:10px 12px;
+    font-family:inherit; font-size:14px; border-radius:2px; color:var(--ink);
+  }
+  .field textarea{ resize:vertical; min-height:58px; }
+  .field-row{ display:flex; gap:10px; }
+  .field-row .field{ flex:1; }
+
+  .order-summary-box{ background:var(--paper); border:1px solid var(--line); border-radius:4px; padding:14px 16px; margin-top:4px; }
+  .order-summary-box h3{ font-size:13px; color:var(--ink-soft); text-transform:none; margin-bottom:8px; font-family:'Work Sans'; font-weight:700; }
+
+  .pay-options{ display:flex; gap:10px; margin-top:2px; }
+  .pay-opt{
+    flex:1; border:1px solid var(--line); background:#fff; padding:12px 10px; text-align:center;
+    border-radius:3px; cursor:pointer; font-size:13px; font-weight:600; color:var(--ink-soft);
+  }
+  .pay-opt.active{ border-color:var(--rani); background:var(--rani); color:#fff; }
+  .confirm-box{ text-align:center; padding:30px 22px; }
+  .confirm-box h2{ font-size:20px; margin-bottom:10px; }
+  .confirm-box p{ font-size:14px; color:var(--ink-soft); line-height:1.5; margin-bottom:18px; }
+  .order-id-box{ display:inline-block; background:var(--paper); border:1px dashed var(--rani); color:var(--rani-deep); font-weight:700; font-size:14px; padding:8px 16px; border-radius:4px; margin-bottom:14px; letter-spacing:0.02em; }
+
+  .track-result{ background:var(--paper); border:1px solid var(--line); border-radius:4px; padding:14px 16px; margin-top:6px; font-size:13.5px; }
+  .track-result .t-row{ display:flex; justify-content:space-between; padding:3px 0; color:var(--ink-soft); }
+  .track-result .t-status{ font-weight:700; margin-top:6px; }
+  .track-result .t-status.confirmed{ color:var(--teal); }
+  .track-result .t-status.cancelled{ color:var(--rust); }
+  .track-msg{ font-size:12.5px; margin-top:6px; }
+  .track-msg.err{ color:var(--rust); }
+  .cancel-btn{ background:var(--rust); color:#fff; border:none; padding:11px 0; width:100%; border-radius:3px; font-weight:600; font-size:14px; cursor:pointer; margin-top:12px; }
+
+  footer{ padding:24px 5vw; text-align:center; color:var(--ink-soft); font-size:12px; border-top:1px solid var(--line); margin-top:10px; }
+  .footer-links{ margin-top:10px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+  .footer-links a{ color:var(--ink-soft); text-decoration:underline; font-size:11.5px; }
+  .footer-links a:hover{ color:var(--rani); }
+
+  @media(max-width:520px){ .banner{ padding:22px 5vw 18px; } main{ padding:20px 5vw 40px; } .field-row{ flex-direction:column; gap:12px; } }
+</style>
+</head>
+<body>
+
+<div class="announce">✦ Free shipping on orders above ₹700 · Handmade in Jaipur · Use code WELCOME10 for 10% off ✦</div>
+<div class="stampline"></div>
+<header>
+  <div class="topbar">
+    <div class="logo-wrap">
+      <svg class="logo-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="36" height="36" rx="8" fill="#D85B78"/>
+        <circle cx="12" cy="12" r="3" fill="#FFFAF6"/>
+        <circle cx="28" cy="12" r="3" fill="#FFFAF6"/>
+        <circle cx="12" cy="28" r="3" fill="#FFFAF6"/>
+        <circle cx="28" cy="28" r="3" fill="#FFFAF6"/>
+        <circle cx="20" cy="20" r="4.5" fill="#C79A45"/>
+      </svg>
+      <div class="logo-text">
+        <div class="brand-name">Rangrez</div>
+        <div class="brand-sub">JAIPUR BLOCK PRINTS</div>
+      </div>
+    </div>
+    <div class="search-wrap">
+      <input id="searchInput" type="text" placeholder="Search fabric, kurti, tote, shirt..." oninput="onSearch()">
+      <span class="search-icon">🔍</span>
+    </div>
+    <button class="header-track" onclick="openTrackModal()">📦 Track / Cancel Order</button>
+    <button class="header-cart" onclick="toggleDrawer(true)">🛒 Cart <span id="cartCount2">0</span></button>
+  </div>
+  <div class="banner">
+    <h1>Jaipur's hand block-printed fabric, kurtis, shirts & totes</h1>
+    <p>Traditional Bagru & Sanganeri prints, sourced and stitched in Jaipur — shipped across India.</p>
+    <div class="banner-badges">
+      <span>🚚 Free shipping above ₹700</span>
+      <span>💳 COD available</span>
+      <span>🧾 GST invoice</span>
+    </div>
+  </div>
+</header>
+
+<div class="trust-row">
+  <div class="trust-card">🧵 <b>100% Handmade</b><span>Hand block-printed in Jaipur</span></div>
+  <div class="trust-card">🚚 <b>Pan-India Shipping</b><span>Free above ₹700</span></div>
+  <div class="trust-card">🔒 <b>Secure Checkout</b><span>COD or online payment</span></div>
+  <div class="trust-card">🧾 <b>GST Invoice</b><span>On every order</span></div>
+</div>
+
+<div class="filters" id="filters"></div>
+
+<main>
+  <div class="grid" id="productGrid"></div>
+</main>
+
+<footer>
+  Rangrez, Jaipur · Prices include GST · Orders confirmed on WhatsApp before dispatch.
+  <div class="footer-links">
+    <a href="privacy-policy.html">Privacy Policy</a>
+    <a href="terms.html">Terms &amp; Conditions</a>
+    <a href="refund-policy.html">Refund &amp; Cancellation Policy</a>
+    <a href="shipping-policy.html">Shipping Policy</a>
+    <a href="contact.html">Contact Us</a>
+  </div>
+</footer>
+
+<button class="cart-fab" onclick="toggleDrawer(true)">
+  🛒 Cart <span class="badge" id="cartCount">0</span>
+</button>
+<a class="wa-fab" id="waFab" href="#" target="_blank" title="Chat on WhatsApp">💬</a>
+
+<div class="overlay" id="overlay" onclick="closeAll()"></div>
+
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h2>Your Order</h2>
+    <button class="drawer-close" onclick="toggleDrawer(false)">&times;</button>
+  </div>
+  <div class="drawer-items" id="drawerItems"></div>
+  <div class="drawer-foot">
+    <div class="coupon-row">
+      <input id="couponInput" type="text" placeholder="Coupon code">
+      <button onclick="applyCoupon()">Apply</button>
+    </div>
+    <div class="coupon-msg" id="couponMsg"></div>
+    <div class="summary-box">
+      <div class="summary-row"><span>Subtotal</span><span id="drawerSubtotal">₹0</span></div>
+      <div class="summary-row" id="drawerDiscountRow" style="display:none;"><span id="drawerDiscountLabel">Discount</span><span id="drawerDiscountAmt">-₹0</span></div>
+      <div class="summary-row grand"><span>Total</span><b id="totalAmt">₹0</b></div>
+      <div class="summary-note">Shipping & GST breakup shown at checkout.</div>
+    </div>
+    <button class="primary-btn" onclick="openCheckout()">Place Order</button>
+  </div>
+</div>
+
+<div class="modal" id="checkoutModal">
+  <div class="modal-head"><h2>Delivery details</h2></div>
+  <div class="modal-body">
+    <div class="field"><label>Your Name *</label><input id="custName" type="text" required></div>
+    <div class="field-row">
+      <div class="field"><label>Phone Number *</label><input id="custPhone" type="tel" maxlength="10" required></div>
+      <div class="field"><label>Email (for order confirmation)</label><input id="custEmail" type="email" placeholder="you@example.com"></div>
+    </div>
+
+    <div class="field-row">
+      <div class="field"><label>State *</label>
+        <select id="custState" required onchange="onStateChange()"></select>
+      </div>
+      <div class="field"><label>Pincode *</label><input id="custPincode" type="text" maxlength="6" inputmode="numeric" required></div>
+    </div>
+
+    <div class="field" id="cityFieldSelect">
+      <label>City *</label>
+      <select id="custCity" required onchange="onCityChange()"></select>
+    </div>
+    <div class="field" id="cityFieldText" style="display:none;">
+      <label>City / Town *</label>
+      <input id="custCityOther" type="text">
+    </div>
+
+    <div class="field"><label>House no., street, locality *</label><textarea id="custAddress" required></textarea></div>
+    <div class="field"><label>Special instructions (optional)</label><textarea id="custNote"></textarea></div>
+
+    <div class="order-summary-box">
+      <h3>Order summary</h3>
+      <div class="summary-box">
+        <div class="summary-row"><span>Subtotal</span><span id="sumSubtotal">₹0</span></div>
+        <div class="summary-row" id="sumDiscountRow" style="display:none;"><span id="sumDiscountLabel">Discount</span><span id="sumDiscountAmt">-₹0</span></div>
+        <div class="summary-row"><span>Shipping</span><span id="sumShipping">₹0</span></div>
+        <div class="summary-row grand"><span>Total payable</span><b id="sumGrandTotal">₹0</b></div>
+        <div class="summary-note" id="sumGstNote">Includes GST (18%): ₹0</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Payment method</label>
+      <div class="pay-options">
+        <div class="pay-opt active" id="opt-cod" onclick="setPayMode('cod')">Cash on Delivery</div>
+        <div class="pay-opt" id="opt-online" onclick="setPayMode('online')">Pay Online Now</div>
+      </div>
+    </div>
+
+    <button class="primary-btn" id="checkoutBtn" onclick="submitOrder()">Confirm Order</button>
+  </div>
+</div>
+
+<div class="modal" id="confirmModal">
+  <div class="confirm-box">
+    <h2 id="confirmTitle">Order placed! 🎉</h2>
+    <div class="order-id-box" id="confirmOrderId">Order ID: —</div>
+    <p id="confirmText">Rangrez will contact you on WhatsApp shortly to confirm your order.</p>
+    <p style="font-size:12px; color:var(--ink-soft); margin-top:-10px; margin-bottom:16px;">Save this Order ID — you'll need it (with your phone number) to track or cancel this order later via "Track / Cancel Order".</p>
+    <a class="primary-btn" id="confirmWaLink" href="#" target="_blank" style="text-decoration:none; display:block; margin-top:0;">Chat on WhatsApp</a>
+    <button class="secondary-btn" onclick="closeAll()">Close</button>
+  </div>
+</div>
+
+<div class="modal" id="trackModal">
+  <div class="modal-head"><h2>Track / Cancel Order</h2></div>
+  <div class="modal-body">
+    <div class="field"><label>Phone Number used for the order *</label><input id="trackPhone" type="tel" maxlength="10"></div>
+    <div class="field"><label>Order ID *</label><input id="trackOrderId" type="text" placeholder="e.g. RGZ12345678"></div>
+    <button class="primary-btn" onclick="findOrder()">Find Order</button>
+    <div id="trackMsg" class="track-msg"></div>
+    <div id="trackResultBox"></div>
+  </div>
+</div>
+
+<div class="modal" id="cancelConfirmModal">
+  <div class="confirm-box">
+    <h2>Order cancelled</h2>
+    <div class="order-id-box" id="cancelledOrderId">Order ID: —</div>
+    <p>Aapka order cancel ho gaya hai. Agar aapne online payment kiya tha, Rangrez aapse WhatsApp par refund ki details confirm karega.</p>
+    <a class="primary-btn" id="cancelWaLink" href="#" target="_blank" style="text-decoration:none; display:block;">Notify Rangrez on WhatsApp</a>
+    <button class="secondary-btn" onclick="closeAll()">Close</button>
+  </div>
+</div>
+
+<script>
+/* ============ CONFIGURE THESE FOR YOUR SHOP ============ */
+const SHOP = {
+  name: "Rangrez",
+  phone: "917742057696",                          // WhatsApp number, country code, no + or spaces
+  ownerEmail: "harshsharma2122004h@gmail.com",     // orders are emailed here via Web3Forms
+  web3formsKey: "6a1db584-78a6-43af-8b28-414d69dc65da", // Web3Forms access key
+  razorpayKeyId: "rzp_test_XXXXXXXXXXXXXX",        // replace with YOUR Razorpay Key ID (see note below)
+  freeShippingAbove: 700,
+  shippingInState: 99,   // shipping cost within Rajasthan, when below free-shipping threshold
+  shippingOutState: 149, // shipping cost outside Rajasthan, when below free-shipping threshold
+  gstPercent: 18,        // GST already included in the listed prices
+
+  // --- Customer confirmation email (EmailJS — free, 200 emails/month) ---
+  emailjsPublicKey: "YOUR_EMAILJS_PUBLIC_KEY",
+  emailjsServiceId: "YOUR_EMAILJS_SERVICE_ID",
+  emailjsTemplateId: "YOUR_EMAILJS_TEMPLATE_ID",
+
+  // --- Free shared database (Google Sheets, via Apps Script Web App) ---
+  sheetsWebAppUrl: "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL",
+};
+
+/* ================= WHY EMAILS AREN'T ARRIVING RIGHT NOW =================
+   1) THE SITE MUST BE HOSTED ONLINE. Opening this .html file by double-
+      clicking it on your computer (a "file://" address) blocks the browser
+      from sending network requests — so Web3Forms, EmailJS and Razorpay
+      will all silently fail. Host it for free (see hosting note in chat)
+      and test again from the real https:// link.
+   2) Web3Forms only emails ONE fixed address — the owner's — never the
+      customer. That's why "as a customer" you never got mail: it isn't
+      wired up for that. EmailJS (below) is what sends a copy to the
+      customer's own email address.
+
+   EmailJS setup (free, ~2 minutes):
+   - Go to emailjs.com → sign up free → Email Services → Add a service
+     (e.g. connect your Gmail) → note the Service ID.
+   - Email Templates → Create Template. Use these variables in the
+     template body: {{to_email}} {{to_name}} {{order_id}} {{message}}
+     Set the "To email" field in the template to {{to_email}}.
+   - Account → General → copy your Public Key.
+   - Paste Service ID / Template ID / Public Key into the three
+     emailjs... fields above. Customers who fill in their email at
+     checkout will then get an automatic confirmation/cancellation copy.
+   =========================================================================== */
+
+/* ================= FREE SHARED DATABASE + PRODUCT SHEET (Google Sheets) =====
+   This turns a Google Sheet into your product catalog AND your shared
+   database — add, edit, price, or remove products just by editing the
+   sheet, no code changes needed. Stock and orders are shared across every
+   customer too (not just saved in one browser).
+
+   1) Go to sheets.google.com → create a new blank spreadsheet.
+   2) Rename the first tab "Products". Row 1 headers exactly:
+      SKU | Name | Description | Price | Category | Unit | Stock | ImageURL
+      Then add one row per product, e.g.:
+      FAB-COT-01 | Pure Cotton — Solid | Everyday wear, 44" width | 180 | Fabric | m | 80 | https://...
+      - Unit column: use "m" for fabric (sold per metre) or "pc" for
+        pieces (tote bags, kurti, shirts).
+      - Category column: use exactly "Fabric", "Tote Bag", "Kurti" or
+        "Printed Shirt" (or type a brand-new category — it'll show up
+        automatically as a new filter tab on the site).
+      - ImageURL: paste a direct image link (see photo note below).
+   3) Add a second tab named "Orders". Row 1 headers:
+      OrderID | Date | Name | Phone | Email | Address | Items | Total | PaymentMode | Status
+   4) Extensions → Apps Script. Delete the placeholder code and paste this:
+
+      function doGet(e){
+        var ss = SpreadsheetApp.getActiveSpreadsheet();
+        var sheet = ss.getSheetByName('Products');
+        var data = sheet.getDataRange().getValues();
+        var products = [];
+        for (var i=1;i<data.length;i++){
+          var r = data[i];
+          if(!r[0]) continue; // skip blank rows
+          products.push({ sku:r[0], name:r[1], desc:r[2], price:Number(r[3]),
+            category:r[4], unit:r[5], stock:Number(r[6]), img:r[7] });
+        }
+        return ContentService.createTextOutput(JSON.stringify({products:products}))
+          .setMimeType(ContentService.MimeType.JSON);
+      }
+      function doPost(e){
+        var ss = SpreadsheetApp.getActiveSpreadsheet();
+        var body = JSON.parse(e.postData.contents);
+        var productsSheet = ss.getSheetByName('Products');
+        var ordersSheet = ss.getSheetByName('Orders');
+        var pData = productsSheet.getDataRange().getValues();
+        function findRow(sku){
+          for (var i=1;i<pData.length;i++){ if(pData[i][0]===sku) return i+1; }
+          return -1;
+        }
+        if(body.action === 'order'){
+          body.items.forEach(function(it){
+            var row = findRow(it.sku);
+            if(row>0){
+              var cur = productsSheet.getRange(row,7).getValue(); // Stock is column 7
+              productsSheet.getRange(row,7).setValue(Math.max(0, cur - it.qty));
+            }
+          });
+          ordersSheet.appendRow([body.orderId, new Date(), body.name, body.phone,
+            body.email||'', body.address, JSON.stringify(body.items), body.total,
+            body.paymentMode, 'Confirmed']);
+        }
+        if(body.action === 'cancel'){
+          var data = ordersSheet.getDataRange().getValues();
+          for (var i=1;i<data.length;i++){
+            if(data[i][0] === body.orderId){
+              ordersSheet.getRange(i+1,10).setValue('Cancelled');
+              var items = JSON.parse(data[i][6]);
+              items.forEach(function(it){
+                var row = findRow(it.sku);
+                if(row>0){
+                  var cur = productsSheet.getRange(row,7).getValue();
+                  productsSheet.getRange(row,7).setValue(cur + it.qty);
+                }
+              });
+              break;
+            }
+          }
+        }
+        return ContentService.createTextOutput(JSON.stringify({success:true}))
+          .setMimeType(ContentService.MimeType.JSON);
+      }
+
+   5) Deploy → New deployment → type "Web app" → Execute as "Me" →
+      Who has access "Anyone" → Deploy → Authorize with your Google account.
+   6) Copy the Web app URL it gives you and paste it into
+      SHOP.sheetsWebAppUrl above. That's it — your whole product catalog
+      (name, price, stock, photo, everything) now loads from your Google
+      Sheet on every visit, shared across every customer. Add a row for a
+      new product, refresh the site, it appears. Change a price in the
+      sheet, refresh, price updates. No code editing needed anymore.
+
+   PHOTO LINKS — a normal Google Drive "share" link will NOT work as an
+   image. Two easy free options:
+   A) imgbb.com or postimages.org — upload the photo, they give you a
+      "Direct link" ending in .jpg/.png — paste that in the ImageURL column.
+      (Recommended — simplest and most reliable.)
+   B) Google Drive — upload photo → right-click → Share → "Anyone with
+      the link" → copy the link → grab the long ID between /d/ and /view
+      → paste into ImageURL as:
+      https://drive.google.com/uc?export=view&id=PASTE_THE_ID_HERE
+   =========================================================================== */
+/* Web3Forms note: go to web3forms.com, enter your email, click "Create
+   Access Key" — you get the key instantly, no account/password needed.
+   Paste it above. No confirmation-email click required, unlike before. */
+
+/* Razorpay note: razorpayKeyId must be replaced with your own Key ID from
+   your Razorpay Dashboard (Settings > API Keys). Signing up for Razorpay,
+   completing KYC, and generating this key is something only you can do —
+   it's tied to your bank account and business identity. Test key (rzp_test_...)
+   works immediately after signup for trying it out; the live key (rzp_live_...)
+   activates after Razorpay approves your KYC. */
+/* ========================================================= */
+
+let products = [
+  // --- Fabric (priced per metre) ---   stock is in metres available
+  { id:1,  sku:"FAB-COT-01", name:"Pure Cotton — Solid",        desc:"Everyday wear, 44\" width",        price:180, category:"Fabric",        unit:"m",  stock:80, img:"https://placehold.co/400x300/B5533C/FAF6EE?text=Cotton" },
+  { id:2,  sku:"FAB-SLK-01", name:"Banarasi Silk",               desc:"Festive, 44\" width",              price:950, category:"Fabric",        unit:"m",  stock:30, img:"https://placehold.co/400x300/7C1836/FAF6EE?text=Silk" },
+  { id:3,  sku:"FAB-LIN-01", name:"Linen Blend",                 desc:"Summer wear, 58\" width",          price:320, category:"Fabric",        unit:"m",  stock:60, img:"https://placehold.co/400x300/1F6B66/FAF6EE?text=Linen" },
+  { id:4,  sku:"FAB-PRN-01", name:"Printed Cotton — Floral",     desc:"Kurti fabric, 44\" width",         price:210, category:"Fabric",        unit:"m",  stock:70, img:"https://placehold.co/400x300/D9A32A/2A2420?text=Printed" },
+  { id:5,  sku:"FAB-CHF-01", name:"Chiffon — Plain",             desc:"Dupatta/lining, 44\" width",       price:150, category:"Fabric",        unit:"m",  stock:50, img:"https://placehold.co/400x300/A6234B/FAF6EE?text=Chiffon" },
+  { id:6,  sku:"FAB-DNM-01", name:"Denim — Mid Wash",            desc:"Bottom wear, 58\" width",          price:280, category:"Fabric",        unit:"m",  stock:40, img:"https://placehold.co/400x300/3B4A6B/FAF6EE?text=Denim" },
+  // --- Tote Bags (priced per piece) ---
+  { id:7,  sku:"BAG-BLK-01", name:"Block-Print Canvas Tote",     desc:"Hand block-printed, 100% cotton canvas", price:349, category:"Tote Bag", unit:"pc", stock:25, img:"https://placehold.co/400x300/D9A32A/241B22?text=Tote" },
+  { id:8,  sku:"BAG-BLK-02", name:"Mini Sling Tote — Floral",    desc:"Everyday sling, cotton canvas",    price:249, category:"Tote Bag",      unit:"pc", stock:25, img:"https://placehold.co/400x300/A6234B/FAF6EE?text=Tote" },
+  { id:9,  sku:"BAG-JUT-01", name:"Jute-Cotton Market Tote",     desc:"Sturdy, reinforced handles",       price:299, category:"Tote Bag",      unit:"pc", stock:20, img:"https://placehold.co/400x300/6E6068/FAF6EE?text=Tote" },
+  // --- Kurti (priced per piece) ---
+  { id:10, sku:"KUR-STR-01", name:"Straight Kurti — Bagru Print",desc:"Cotton, Free size (up to L)",      price:699, category:"Kurti",         unit:"pc", stock:18, img:"https://placehold.co/400x300/7C1836/FAF6EE?text=Kurti" },
+  { id:11, sku:"KUR-ANK-01", name:"Anarkali Kurti — Floral",     desc:"Cotton, Free size (up to XL)",     price:899, category:"Kurti",         unit:"pc", stock:15, img:"https://placehold.co/400x300/D9A32A/241B22?text=Kurti" },
+  { id:12, sku:"KUR-CTN-01", name:"Cotton Kurti — Indigo Dabu",  desc:"Hand block-printed, Free size",    price:649, category:"Kurti",         unit:"pc", stock:18, img:"https://placehold.co/400x300/1F6B66/FAF6EE?text=Kurti" },
+  // --- Printed Shirts (priced per piece) ---
+  { id:13, sku:"SHT-MEN-01", name:"Men's Printed Shirt — Cotton",desc:"Regular fit, S–XXL",               price:799, category:"Printed Shirt", unit:"pc", stock:20, img:"https://placehold.co/400x300/2B3A67/FAF6EE?text=Shirt" },
+  { id:14, sku:"SHT-MEN-02", name:"Men's Printed Shirt — Linen", desc:"Relaxed fit, S–XXL",                price:999, category:"Printed Shirt", unit:"pc", stock:18, img:"https://placehold.co/400x300/6E6068/FAF6EE?text=Shirt" },
+  { id:15, sku:"SHT-WMN-01", name:"Women's Printed Shirt",       desc:"Cotton, XS–XL",                    price:749, category:"Printed Shirt", unit:"pc", stock:20, img:"https://placehold.co/400x300/B5533C/FAF6EE?text=Shirt" },
+];
+/* NOTE: these 15 are just placeholder/demo products, shown until your Google Sheet
+   loads (see the "FREE SHARED DATABASE + PRODUCT SHEET" note above SHOP). Once
+   SHOP.sheetsWebAppUrl is configured, the site replaces this whole list with
+   whatever is in your "Products" sheet — edit the sheet, not this code, to
+   manage your real catalog, prices, stock and photos. */
+
+// Sample discount vouchers — edit or add your own
+const VOUCHERS = {
+  "WELCOME10":  { type:"percent", value:10,  minOrder:500,  maxDiscount:150 },
+  "FLAT100":    { type:"flat",    value:100, minOrder:999 },
+  "RANGREZ200": { type:"flat",    value:200, minOrder:1999 },
+};
+
+// State -> common cities (dropdown). "Other / not listed" is always appended in code.
+const CITY_DATA = {
+  "Andhra Pradesh": ["Visakhapatnam","Vijayawada","Guntur","Tirupati"],
+  "Arunachal Pradesh": ["Itanagar","Naharlagun"],
+  "Assam": ["Guwahati","Dibrugarh","Silchar"],
+  "Bihar": ["Patna","Gaya","Muzaffarpur"],
+  "Chhattisgarh": ["Raipur","Bhilai","Bilaspur"],
+  "Goa": ["Panaji","Margao"],
+  "Gujarat": ["Ahmedabad","Surat","Vadodara","Rajkot"],
+  "Haryana": ["Gurugram","Faridabad","Panipat"],
+  "Himachal Pradesh": ["Shimla","Manali","Dharamshala"],
+  "Jharkhand": ["Ranchi","Jamshedpur","Dhanbad"],
+  "Karnataka": ["Bengaluru","Mysuru","Mangaluru","Hubballi"],
+  "Kerala": ["Kochi","Thiruvananthapuram","Kozhikode"],
+  "Madhya Pradesh": ["Bhopal","Indore","Gwalior","Jabalpur"],
+  "Maharashtra": ["Mumbai","Pune","Nagpur","Nashik"],
+  "Manipur": ["Imphal"],
+  "Meghalaya": ["Shillong"],
+  "Mizoram": ["Aizawl"],
+  "Nagaland": ["Kohima","Dimapur"],
+  "Odisha": ["Bhubaneswar","Cuttack","Rourkela"],
+  "Punjab": ["Ludhiana","Amritsar","Jalandhar","Chandigarh"],
+  "Rajasthan": ["Jaipur","Jodhpur","Udaipur","Kota","Ajmer","Bikaner","Alwar","Bhilwara"],
+  "Sikkim": ["Gangtok"],
+  "Tamil Nadu": ["Chennai","Coimbatore","Madurai","Tiruchirappalli"],
+  "Telangana": ["Hyderabad","Warangal","Nizamabad"],
+  "Tripura": ["Agartala"],
+  "Uttar Pradesh": ["Lucknow","Kanpur","Varanasi","Agra","Noida"],
+  "Uttarakhand": ["Dehradun","Haridwar","Nainital"],
+  "West Bengal": ["Kolkata","Howrah","Siliguri"],
+  "Andaman and Nicobar Islands": ["Port Blair"],
+  "Chandigarh": ["Chandigarh"],
+  "Dadra and Nagar Haveli and Daman and Diu": ["Daman","Silvassa"],
+  "Delhi": ["New Delhi","Dwarka","Rohini"],
+  "Jammu and Kashmir": ["Srinagar","Jammu"],
+  "Ladakh": ["Leh","Kargil"],
+  "Lakshadweep": ["Kavaratti"],
+  "Puducherry": ["Puducherry"],
+};
+const STATES = Object.keys(CITY_DATA).sort();
+
+let categories = ["All", ...new Set(products.map(p => p.category))];
+function refreshCategories(){ categories = ["All", ...new Set(products.map(p => p.category))]; }
+let activeCategory = "All";
+let searchQuery = "";
+let qtySelect = {}; products.forEach(p => qtySelect[p.id] = 1);
+let cart = JSON.parse(localStorage.getItem('rangrez_cart') || '{}');
+let payMode = 'cod';
+let appliedCoupon = null;
+
+/* ---------- Stock (localStorage cache; overwritten by the Products sheet if configured) ---------- */
+const STOCK_KEY = 'rangrez_stock';
+const ORDERS_KEY = 'rangrez_orders';
+
+function loadStock(){
+  let stock = JSON.parse(localStorage.getItem(STOCK_KEY) || '{}');
+  let changed = false;
+  products.forEach(p => { if(!(p.id in stock)){ stock[p.id] = p.stock; changed = true; } });
+  if(changed) localStorage.setItem(STOCK_KEY, JSON.stringify(stock));
+  return stock;
+}
+let stockLevels = loadStock();
+function saveStock(){ localStorage.setItem(STOCK_KEY, JSON.stringify(stockLevels)); }
+function getStock(id){ return stockLevels[id] !== undefined ? stockLevels[id] : 0; }
+function decrementStock(items){
+  items.forEach(it => { stockLevels[it.id] = Math.max(0, getStock(it.id) - it.qty); });
+  saveStock();
+}
+function restoreStock(items){
+  items.forEach(it => { stockLevels[it.id] = getStock(it.id) + it.qty; });
+  saveStock();
+}
+
+/* ---------- Orders (per-browser order history, for tracking/cancellation) ---------- */
+function loadOrders(){ return JSON.parse(localStorage.getItem(ORDERS_KEY) || '[]'); }
+function saveOrders(orders){ localStorage.setItem(ORDERS_KEY, JSON.stringify(orders)); }
+function generateOrderId(){ return 'RGZ' + Date.now().toString().slice(-9); }
+
+function fmt(n){ return "₹" + Math.round(n).toLocaleString("en-IN"); }
+function saveCart(){ localStorage.setItem('rangrez_cart', JSON.stringify(cart)); }
+function unitLabel(u){ return u === 'm' ? 'm' : 'pc'; }
+function unitFull(u){ return u === 'm' ? '/ metre' : '/ piece'; }
+
+/* ---------- Filters & search ---------- */
+function renderFilters(){
+  document.getElementById('filters').innerHTML = categories.map(c => `
+    <button class="filter-btn ${c===activeCategory?'active':''}" onclick="setCategory('${c}')">${c}</button>
+  `).join('');
+}
+function setCategory(c){ activeCategory = c; renderFilters(); renderGrid(); }
+function onSearch(){ searchQuery = document.getElementById('searchInput').value.trim().toLowerCase(); renderGrid(); }
+
+function renderGrid(){
+  let list = products.filter(p => activeCategory==="All" || p.category===activeCategory);
+  if(searchQuery){
+    list = list.filter(p => p.name.toLowerCase().includes(searchQuery) || p.desc.toLowerCase().includes(searchQuery) || p.category.toLowerCase().includes(searchQuery) || p.sku.toLowerCase().includes(searchQuery));
+  }
+  const grid = document.getElementById('productGrid');
+  if(list.length === 0){
+    grid.innerHTML = `<div class="no-results">Koi product nahi mila. Try a different search or category.</div>`;
+    return;
+  }
+  grid.innerHTML = list.map(p => {
+    const stock = getStock(p.id);
+    const lowThreshold = p.unit === 'm' ? 10 : 5;
+    let stockHtml;
+    if(stock <= 0) stockHtml = `<div class="stock-tag out">Out of stock</div>`;
+    else if(stock <= lowThreshold) stockHtml = `<div class="stock-tag low">Only ${stock}${unitLabel(p.unit)} left!</div>`;
+    else stockHtml = `<div class="stock-tag ok">In stock</div>`;
+    const qtyVal = Math.min(qtySelect[p.id], stock > 0 ? stock : qtySelect[p.id]);
+    return `
+    <div class="card ${stock<=0?'out-of-stock':''}">
+      <img src="${p.img}" alt="${p.name}" loading="lazy">
+      <div class="card-body">
+        <div>
+          <div class="sku-tag">${p.sku}</div>
+          <div class="fabric-name">${p.name}</div>
+          <div class="fabric-desc">${p.desc}</div>
+          ${stockHtml}
+        </div>
+        <div class="price">${fmt(p.price)} <small>${unitFull(p.unit)}</small></div>
+        <div class="qty-row ${stock<=0?'disabled':''}">
+          <button onclick="stepQty('${p.id}', ${p.unit==='m'?-0.5:-1})">−</button>
+          <div class="qty-val">${qtyVal} <small>${unitLabel(p.unit)}</small></div>
+          <button onclick="stepQty('${p.id}', ${p.unit==='m'?0.5:1})">+</button>
+        </div>
+        <button class="add-btn" id="add-${p.id}" onclick="addToCart('${p.id}')" ${stock<=0?'disabled':''}>${stock<=0?'Out of Stock':'Add to Cart'}</button>
+      </div>
+    </div>
+  `;
+  }).join('');
+}
+
+function stepQty(id, delta){
+  const p = products.find(x => x.id == id);
+  const step = p.unit === 'm' ? 0.5 : 1;
+  const stock = getStock(id);
+  let next = qtySelect[id] + delta;
+  if(next < step) next = step;
+  if(next > 50) next = 50;
+  if(stock > 0 && next > stock) next = stock;
+  qtySelect[id] = next;
+  renderGrid();
+}
+
+/* ---------- Cart ---------- */
+function addToCart(id){
+  const p = products.find(x => x.id == id);
+  const qty = qtySelect[id];
+  const stock = getStock(id);
+  const alreadyInCart = cart[id] || 0;
+  if(stock <= 0){ alert("Yeh product abhi out of stock hai."); return; }
+  if(alreadyInCart + qty > stock){ alert(`Sirf ${stock}${unitLabel(p.unit)} available hai — cart mein already ${alreadyInCart}${unitLabel(p.unit)} hai.`); return; }
+  cart[id] = alreadyInCart + qty;
+  saveCart();
+  const btn = document.getElementById('add-' + id);
+  btn.textContent = "Added ✓"; btn.classList.add('added');
+  setTimeout(() => { btn.textContent = "Add to Cart"; btn.classList.remove('added'); }, 800);
+  renderCart();
+}
+function changeCartQty(id, delta){
+  const p = products.find(x => x.id == id);
+  if(!p){ delete cart[id]; saveCart(); renderCart(); return; }
+  const step = p.unit === 'm' ? 0.5 : 1;
+  const stock = getStock(id);
+  let next = (cart[id]||0) + delta;
+  if(delta > 0 && stock > 0 && next > stock) next = stock;
+  if(next < step){ delete cart[id]; } else { cart[id] = next; }
+  saveCart(); renderCart();
+}
+function removeFromCart(id){ delete cart[id]; saveCart(); renderCart(); }
+
+function getSubtotal(){
+  const ids = Object.keys(cart).filter(id => cart[id] > 0);
+  return ids.reduce((s,id) => { const p = products.find(x=>x.id==id); return p ? s + cart[id]*p.price : s; }, 0);
+}
+function getDiscount(subtotal){
+  if(!appliedCoupon) return 0;
+  const v = VOUCHERS[appliedCoupon];
+  if(!v || subtotal < v.minOrder) return 0;
+  let d = v.type === 'percent' ? subtotal * v.value / 100 : v.value;
+  if(v.maxDiscount) d = Math.min(d, v.maxDiscount);
+  return Math.min(Math.round(d), subtotal);
+}
+function getShipping(subtotal){
+  if(subtotal >= SHOP.freeShippingAbove) return 0;
+  const state = document.getElementById('custState') ? document.getElementById('custState').value : '';
+  return state === 'Rajasthan' ? SHOP.shippingInState : SHOP.shippingOutState;
+}
+function getGstBreakup(subtotal){
+  const taxable = subtotal / (1 + SHOP.gstPercent/100);
+  const gst = subtotal - taxable;
+  return { taxable, gst };
+}
+
+function applyCoupon(){
+  const code = document.getElementById('couponInput').value.trim().toUpperCase();
+  const msgEl = document.getElementById('couponMsg');
+  if(!code){ appliedCoupon = null; msgEl.textContent = ''; renderCart(); return; }
+  const v = VOUCHERS[code];
+  const subtotal = getSubtotal();
+  if(!v){ appliedCoupon = null; msgEl.textContent = 'Invalid coupon code.'; msgEl.className = 'coupon-msg err'; renderCart(); return; }
+  if(subtotal < v.minOrder){ appliedCoupon = null; msgEl.textContent = `Add items worth ${fmt(v.minOrder)} or more to use this code.`; msgEl.className = 'coupon-msg err'; renderCart(); return; }
+  appliedCoupon = code;
+  msgEl.textContent = 'Coupon applied!';
+  msgEl.className = 'coupon-msg ok';
+  renderCart();
+}
+
+function renderCart(){
+  const ids = Object.keys(cart).filter(id => cart[id] > 0);
+  document.getElementById('cartCount').textContent = ids.length;
+  document.getElementById('cartCount2').textContent = ids.length;
+  const itemsEl = document.getElementById('drawerItems');
+  if(ids.length === 0){
+    itemsEl.innerHTML = `<div class="empty-cart">Aapka cart abhi khaali hai.</div>`;
+  } else {
+    itemsEl.innerHTML = ids.map(id => {
+      const p = products.find(x => x.id == id);
+      if(!p) return '';
+      const qty = cart[id];
+      const step = p.unit === 'm' ? 0.5 : 1;
+      return `
+        <div class="drawer-item">
+          <div>
+            <div class="name">${p.name}</div>
+            <div class="sub">${qty} ${unitLabel(p.unit)} × ${fmt(p.price)}</div>
+            <div style="display:flex; gap:10px; align-items:center; margin-top:6px;">
+              <button class="remove-x" onclick="changeCartQty('${id}', ${-step})" style="text-decoration:none;">−${step}${unitLabel(p.unit)}</button>
+              <button class="remove-x" onclick="changeCartQty('${id}', ${step})" style="text-decoration:none;">+${step}${unitLabel(p.unit)}</button>
+              <button class="remove-x" onclick="removeFromCart('${id}')">Remove</button>
+            </div>
+          </div>
+          <div class="amt">${fmt(qty * p.price)}</div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  const subtotal = getSubtotal();
+  const discount = getDiscount(subtotal);
+  document.getElementById('drawerSubtotal').textContent = fmt(subtotal);
+  const discRow = document.getElementById('drawerDiscountRow');
+  if(discount > 0){
+    discRow.style.display = 'flex';
+    document.getElementById('drawerDiscountLabel').textContent = `Discount (${appliedCoupon})`;
+    document.getElementById('drawerDiscountAmt').textContent = '-' + fmt(discount);
+  } else {
+    discRow.style.display = 'none';
+  }
+  document.getElementById('totalAmt').textContent = fmt(subtotal - discount);
+  document.getElementById('waFab').href = `https://wa.me/${SHOP.phone}`;
+
+  renderOrderSummary();
+}
+
+function renderOrderSummary(){
+  const sumSubtotal = document.getElementById('sumSubtotal');
+  if(!sumSubtotal) return; // modal not open / not needed yet
+  const subtotal = getSubtotal();
+  const discount = getDiscount(subtotal);
+  const shipping = getShipping(subtotal);
+  const grand = subtotal - discount + shipping;
+  const { gst } = getGstBreakup(subtotal);
+
+  sumSubtotal.textContent = fmt(subtotal);
+  const discRow = document.getElementById('sumDiscountRow');
+  if(discount > 0){
+    discRow.style.display = 'flex';
+    document.getElementById('sumDiscountLabel').textContent = `Discount (${appliedCoupon})`;
+    document.getElementById('sumDiscountAmt').textContent = '-' + fmt(discount);
+  } else {
+    discRow.style.display = 'none';
+  }
+  document.getElementById('sumShipping').textContent = shipping === 0 ? 'FREE' : fmt(shipping);
+  document.getElementById('sumGrandTotal').textContent = fmt(grand);
+  document.getElementById('sumGstNote').textContent = `Includes GST (${SHOP.gstPercent}%): ${fmt(gst)}`;
+}
+
+/* ---------- Drawer / modal open-close ---------- */
+function toggleDrawer(open){
+  document.getElementById('drawer').classList.toggle('open', open);
+  document.getElementById('overlay').classList.toggle('open', open);
+}
+function openCheckout(){
+  if(Object.keys(cart).filter(id=>cart[id]>0).length === 0){ alert("Cart khaali hai — pehle kuch add karein."); return; }
+  toggleDrawer(false);
+  document.getElementById('checkoutModal').classList.add('open');
+  document.getElementById('overlay').classList.add('open');
+  renderOrderSummary();
+}
+function closeAll(){
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('checkoutModal').classList.remove('open');
+  document.getElementById('confirmModal').classList.remove('open');
+  document.getElementById('trackModal').classList.remove('open');
+  document.getElementById('cancelConfirmModal').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+}
+
+function setPayMode(mode){
+  payMode = mode;
+  document.getElementById('opt-cod').classList.toggle('active', mode==='cod');
+  document.getElementById('opt-online').classList.toggle('active', mode==='online');
+  document.getElementById('checkoutBtn').textContent = mode==='online' ? 'Pay & Confirm Order' : 'Confirm Order';
+}
+
+/* ---------- State / City selects ---------- */
+function populateStates(){
+  const sel = document.getElementById('custState');
+  sel.innerHTML = `<option value="">Select state</option>` + STATES.map(s => `<option value="${s}">${s}</option>`).join('');
+}
+function onStateChange(){
+  const state = document.getElementById('custState').value;
+  const citySel = document.getElementById('custCity');
+  const cities = CITY_DATA[state] || [];
+  citySel.innerHTML = `<option value="">Select city</option>` + cities.map(c => `<option value="${c}">${c}</option>`).join('') + `<option value="__other__">Other / not listed</option>`;
+  document.getElementById('cityFieldSelect').style.display = 'block';
+  document.getElementById('cityFieldText').style.display = 'none';
+  renderOrderSummary();
+}
+function onCityChange(){
+  const val = document.getElementById('custCity').value;
+  document.getElementById('cityFieldText').style.display = val === '__other__' ? 'block' : 'none';
+}
+function getCityValue(){
+  const sel = document.getElementById('custCity').value;
+  if(sel === '__other__') return document.getElementById('custCityOther').value.trim();
+  return sel;
+}
+
+/* ---------- Order submission ---------- */
+function getOrderData(){
+  const name = document.getElementById('custName').value.trim();
+  const phone = document.getElementById('custPhone').value.trim();
+  const email = document.getElementById('custEmail').value.trim();
+  const pincode = document.getElementById('custPincode').value.trim();
+  const state = document.getElementById('custState').value;
+  const city = getCityValue();
+  const address = document.getElementById('custAddress').value.trim();
+  const note = document.getElementById('custNote').value.trim();
+
+  const ids = Object.keys(cart).filter(id => cart[id] > 0 && products.find(x => x.id == id));
+  const items = ids.map(id => {
+    const p = products.find(x => x.id == id);
+    return { id: p.id, sku: p.sku, name: p.name, qty: cart[id], unit: p.unit, price: p.price };
+  });
+  const lines = items.map(it => `${it.name} (${it.sku}) — ${it.qty}${unitLabel(it.unit)} × ${fmt(it.price)} = ${fmt(it.qty*it.price)}`);
+
+  const subtotal = getSubtotal();
+  const discount = getDiscount(subtotal);
+  const shipping = getShipping(subtotal);
+  const total = subtotal - discount + shipping;
+  const { gst } = getGstBreakup(subtotal);
+
+  return { name, phone, email, pincode, state, city, address, note, ids, items, lines, subtotal, discount, shipping, total, gst };
+}
+
+function buildSummary(orderId, o, paymentId){
+  return `New order from ${SHOP.name} website
+
+Order ID: ${orderId}
+Customer: ${o.name}
+Phone: ${o.phone}
+Address: ${o.address}, ${o.city}, ${o.state} - ${o.pincode}
+Note: ${o.note || '-'}
+Payment: ${paymentId ? 'PAID ONLINE — Razorpay ID: ' + paymentId : 'Cash on Delivery'}
+
+Items:
+${o.lines.join('\n')}
+
+Subtotal: ${fmt(o.subtotal)}
+${o.discount > 0 ? `Discount (${appliedCoupon}): -${fmt(o.discount)}\n` : ''}Shipping: ${o.shipping === 0 ? 'FREE' : fmt(o.shipping)}
+Total: ${fmt(o.total)} (incl. GST ${fmt(o.gst)})`;
+}
+
+async function sendShopEmail(subject, summary, name, phone, address){
+  try{
+    await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({
+        access_key: SHOP.web3formsKey,
+        subject: subject,
+        name: name,
+        phone: phone,
+        address: address,
+        message: summary,
+      }),
+    });
+  }catch(e){ console.warn("Email failed to send:", e); }
+}
+
+// A config field still holding its placeholder text means that feature hasn't been set up yet —
+// skip it quietly instead of throwing errors, so the rest of the site keeps working.
+function isConfigured(value){
+  return value && !value.startsWith('YOUR_');
+}
+
+function sendCustomerEmail(toEmail, toName, orderId, summary){
+  if(!toEmail || !isConfigured(SHOP.emailjsPublicKey) || !isConfigured(SHOP.emailjsServiceId) || !isConfigured(SHOP.emailjsTemplateId)) return;
+  try{
+    emailjs.send(SHOP.emailjsServiceId, SHOP.emailjsTemplateId, {
+      to_email: toEmail, to_name: toName, order_id: orderId, message: summary,
+    }, SHOP.emailjsPublicKey).catch(e => console.warn("Customer email failed:", e));
+  }catch(e){ console.warn("Customer email failed:", e); }
+}
+
+async function syncOrderToSheet(payload){
+  if(!isConfigured(SHOP.sheetsWebAppUrl)) return;
+  try{
+    await fetch(SHOP.sheetsWebAppUrl, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain" }, // avoids a CORS preflight on Apps Script
+      body: JSON.stringify(payload),
+    });
+  }catch(e){ console.warn("Sheet sync failed:", e); }
+}
+
+async function fetchSheetData(){
+  if(!isConfigured(SHOP.sheetsWebAppUrl)) return;
+  try{
+    const res = await fetch(SHOP.sheetsWebAppUrl);
+    const data = await res.json();
+    if(data && Array.isArray(data.products) && data.products.length > 0){
+      // replace the whole catalog with what's in the sheet — id = SKU, since
+      // sheet rows don't have a numeric id
+      products.length = 0;
+      data.products.forEach(r => {
+        products.push({
+          id: r.sku, sku: r.sku, name: r.name, desc: r.desc, price: Number(r.price) || 0,
+          category: r.category, unit: (r.unit === 'm' ? 'm' : 'pc'), stock: Number(r.stock) || 0,
+          img: r.img || 'https://placehold.co/400x300/D85B78/FFFAF6?text=' + encodeURIComponent(r.name || 'Rangrez'),
+        });
+      });
+      // reset stock cache and qty selectors for the newly loaded catalog
+      stockLevels = {}; products.forEach(p => { stockLevels[p.id] = p.stock; qtySelect[p.id] = 1; });
+      saveStock();
+      refreshCategories();
+      if(!categories.includes(activeCategory)) activeCategory = "All";
+      renderFilters();
+      renderGrid();
+      renderCart();
+    }
+  }catch(e){ console.warn("Could not load product sheet, showing placeholder products:", e); }
+}
+
+function finishOrder(orderId, summary, o, paymentId){
+  // decrement stock now that the order is confirmed
+  decrementStock(o.items);
+
+  // save order record locally so the customer can track/cancel it later
+  const orders = loadOrders();
+  orders.push({
+    orderId, name: o.name, phone: o.phone, email: o.email, pincode: o.pincode, state: o.state, city: o.city,
+    address: o.address, note: o.note, items: o.items, subtotal: o.subtotal, discount: o.discount,
+    couponCode: appliedCoupon, shipping: o.shipping, total: o.total, gst: o.gst,
+    paymentMode: paymentId ? 'online' : 'cod', paymentId: paymentId || null,
+    status: 'confirmed', createdAt: new Date().toISOString(),
+  });
+  saveOrders(orders);
+
+  sendCustomerEmail(o.email, o.name, orderId, summary);
+  syncOrderToSheet({
+    action: 'order', orderId, name: o.name, phone: o.phone, email: o.email,
+    address: `${o.address}, ${o.city}, ${o.state} - ${o.pincode}`,
+    items: o.items.map(it => ({ sku: it.sku, qty: it.qty })),
+    total: o.total, paymentMode: paymentId ? 'online' : 'cod',
+  });
+
+  document.getElementById('confirmOrderId').textContent = `Order ID: ${orderId}`;
+  const waMsg = encodeURIComponent(summary);
+  document.getElementById('confirmWaLink').href = `https://wa.me/${SHOP.phone}?text=${waMsg}`;
+  cart = {}; appliedCoupon = null;
+  document.getElementById('couponInput').value = '';
+  document.getElementById('couponMsg').textContent = '';
+  saveCart(); renderCart(); renderGrid();
+  document.getElementById('checkoutModal').classList.remove('open');
+  document.getElementById('confirmModal').classList.add('open');
+}
+
+function submitOrder(){
+  const o = getOrderData();
+  if(!o.name || !o.phone || !o.address){ alert("Naam, phone aur address bharna zaroori hai."); return; }
+  if(!/^\d{10}$/.test(o.phone)){ alert("Sahi 10-digit phone number daalein."); return; }
+  if(!/^\d{6}$/.test(o.pincode)){ alert("Sahi 6-digit pincode daalein."); return; }
+  if(!o.state){ alert("State select karein."); return; }
+  if(!o.city){ alert("City select ya type karein."); return; }
+  if(o.ids.length === 0){ alert("Cart khaali hai."); return; }
+  for(const it of o.items){
+    if(it.qty > getStock(it.id)){ alert(`${it.name} sirf ${getStock(it.id)}${unitLabel(it.unit)} available hai.`); return; }
+  }
+
+  const orderId = generateOrderId();
+  const fullAddress = `${o.address}, ${o.city}, ${o.state} - ${o.pincode}`;
+
+  if(payMode === 'online'){
+    const rzp = new Razorpay({
+      key: SHOP.razorpayKeyId,
+      amount: o.total * 100, // paise
+      currency: "INR",
+      name: SHOP.name,
+      description: "Rangrez order payment",
+      prefill: { name: o.name, contact: o.phone },
+      theme: { color: "#A6234B" },
+      handler: function(response){
+        const summary = buildSummary(orderId, o, response.razorpay_payment_id);
+        document.getElementById('confirmTitle').textContent = "Payment received! 🎉";
+        document.getElementById('confirmText').textContent = "Thank you — your payment is confirmed. Rangrez will message you on WhatsApp with delivery details.";
+        sendShopEmail(`New Order ${orderId} — ${o.name} (${fmt(o.total)})`, summary, o.name, o.phone, fullAddress);
+        finishOrder(orderId, summary, o, response.razorpay_payment_id);
+      },
+      modal: {
+        ondismiss: function(){ /* user closed payment popup without paying */ }
+      }
+    });
+    rzp.open();
+  } else {
+    const summary = buildSummary(orderId, o, null);
+    document.getElementById('confirmTitle').textContent = "Order placed! 🎉";
+    document.getElementById('confirmText').textContent = "Rangrez will contact you on WhatsApp shortly to confirm your order.";
+    sendShopEmail(`New Order ${orderId} — ${o.name} (${fmt(o.total)})`, summary, o.name, o.phone, fullAddress);
+    finishOrder(orderId, summary, o, null);
+  }
+}
+
+/* ---------- Track / Cancel Order ---------- */
+function openTrackModal(){
+  document.getElementById('trackPhone').value = '';
+  document.getElementById('trackOrderId').value = '';
+  document.getElementById('trackMsg').textContent = '';
+  document.getElementById('trackMsg').className = 'track-msg';
+  document.getElementById('trackResultBox').innerHTML = '';
+  document.getElementById('trackModal').classList.add('open');
+  document.getElementById('overlay').classList.add('open');
+}
+
+function findOrder(){
+  const phone = document.getElementById('trackPhone').value.trim();
+  const orderId = document.getElementById('trackOrderId').value.trim().toUpperCase();
+  const msgEl = document.getElementById('trackMsg');
+  const box = document.getElementById('trackResultBox');
+  box.innerHTML = '';
+  if(!phone || !orderId){ msgEl.textContent = 'Phone number aur Order ID dono bharein.'; msgEl.className = 'track-msg err'; return; }
+
+  const orders = loadOrders();
+  const order = orders.find(o => o.orderId.toUpperCase() === orderId && o.phone === phone);
+  if(!order){ msgEl.textContent = 'Order nahi mila. Phone number aur Order ID check karein.'; msgEl.className = 'track-msg err'; return; }
+
+  msgEl.textContent = '';
+  const itemLines = order.items.map(it => `<div class="t-row"><span>${it.name} (${it.sku})</span><span>${it.qty}${unitLabel(it.unit)}</span></div>`).join('');
+  box.innerHTML = `
+    <div class="track-result">
+      <div class="t-row"><span>Order ID</span><span>${order.orderId}</span></div>
+      <div class="t-row"><span>Placed on</span><span>${new Date(order.createdAt).toLocaleDateString('en-IN')}</span></div>
+      ${itemLines}
+      <div class="t-row"><span>Total</span><span>${fmt(order.total)}</span></div>
+      <div class="t-status ${order.status}">${order.status === 'confirmed' ? 'Confirmed ✓' : 'Cancelled ✗'}</div>
+      ${order.status === 'confirmed' ? `<button class="cancel-btn" onclick="cancelOrder('${order.orderId}')">Cancel this order</button>` : ''}
+    </div>
+  `;
+}
+
+function cancelOrder(orderId){
+  if(!confirm(`Kya aap order ${orderId} cancel karna chahte hain?`)) return;
+  const orders = loadOrders();
+  const order = orders.find(o => o.orderId === orderId);
+  if(!order || order.status !== 'confirmed') return;
+
+  order.status = 'cancelled';
+  order.cancelledAt = new Date().toISOString();
+  saveOrders(orders);
+  restoreStock(order.items); // give the stock back
+  renderGrid();
+
+  const cancelSummary = `Order CANCELLED — ${SHOP.name}
+
+Order ID: ${orderId}
+Customer: ${order.name}
+Phone: ${order.phone}
+Total: ${fmt(order.total)}
+Payment: ${order.paymentMode === 'online' ? 'was paid online' : 'Cash on Delivery'}
+
+Customer has cancelled this order via the website.`;
+  sendShopEmail(`Order CANCELLED ${orderId} — ${order.name}`, cancelSummary, order.name, order.phone, `${order.address}, ${order.city}, ${order.state} - ${order.pincode}`);
+  sendCustomerEmail(order.email, order.name, orderId, cancelSummary);
+  syncOrderToSheet({ action: 'cancel', orderId, items: order.items.map(it => ({ sku: it.sku, qty: it.qty })) });
+
+  document.getElementById('cancelledOrderId').textContent = `Order ID: ${orderId}`;
+  document.getElementById('cancelWaLink').href = `https://wa.me/${SHOP.phone}?text=${encodeURIComponent(cancelSummary)}`;
+  document.getElementById('trackModal').classList.remove('open');
+  document.getElementById('cancelConfirmModal').classList.add('open');
+}
+
+/* ---------- Init ---------- */
+if(isConfigured(SHOP.emailjsPublicKey)){ try{ emailjs.init(SHOP.emailjsPublicKey); }catch(e){ console.warn("EmailJS init failed:", e); } }
+populateStates();
+renderFilters();
+renderGrid();
+renderCart();
+fetchSheetData();
+</script>
+
+</body>
+</html>

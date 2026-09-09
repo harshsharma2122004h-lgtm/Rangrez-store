@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+:root{
+  --rani:#D85B78; --rani-deep:#B83F5C; --mustard:#C79A45;
+  --ink:#131A2A; --ink-soft:#70717A; --ivory:#FFFAF6; --paper:#F7EEE8; --line:#E7DCD6;
+}
+*{ box-sizing:border-box; margin:0; padding:0; }
+body{ font-family:'DM Sans', sans-serif; background:var(--ivory); color:var(--ink); line-height:1.6; padding-bottom:40px; }
+h1,h2{ font-family:'Playfair Display', serif; font-weight:600; }
+a{ color:var(--rani-deep); }
+
+.stampline{ height:8px; background:linear-gradient(90deg, var(--rani), var(--mustard)); }
+header{ background:var(--ink); color:var(--ivory); padding:16px 6vw; display:flex; align-items:center; gap:10px; }
+header a{ color:var(--ivory); text-decoration:none; display:flex; align-items:center; gap:10px; }
+header .logo-icon{ width:32px; height:32px; }
+header .brand{ font-family:'Playfair Display'; font-size:19px; }
+
+main{ max-width:760px; margin:0 auto; padding:34px 6vw 20px; }
+main h1{ font-size:26px; margin-bottom:6px; }
+main .updated{ font-size:12px; color:var(--ink-soft); margin-bottom:22px; }
+main h2{ font-size:17px; margin-top:26px; margin-bottom:8px; color:var(--rani-deep); }
+main p, main li{ font-size:14px; color:#2c2c33; margin-bottom:8px; }
+main ul{ padding-left:20px; margin-bottom:10px; }
+main .box{ background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:14px 16px; margin:16px 0; font-size:13.5px; }
+
+footer{ text-align:center; padding:22px 6vw; color:var(--ink-soft); font-size:12px; border-top:1px solid var(--line); margin-top:20px; }
+footer a{ color:var(--ink-soft); }
