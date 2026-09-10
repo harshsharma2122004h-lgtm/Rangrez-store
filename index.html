@@ -103,7 +103,7 @@
   }
 
   .trust-row{
-    display:grid;grid-template-columns:repeat(4,1fr);gap:10px;
+    display:grid;grid-template-columns:repeat(2,1fr);gap:10px;
     padding:15px 5vw;background:var(--ivory);border-bottom:1px solid var(--line)
   }
   .trust-card{
@@ -162,16 +162,6 @@
   .qty-row.disabled{opacity:.5;pointer-events:none}
   .no-results{color:var(--ink-soft);font-size:14px;padding:35px 0;text-align:center;grid-column:1/-1}
 
-  .cart-fab{
-    position:fixed;right:20px;bottom:20px;background:var(--mustard);color:#292522;
-    border:0;border-radius:999px;padding:13px 18px;font-weight:700;font-size:13px;
-    box-shadow:0 8px 24px rgba(36,27,34,.22);cursor:pointer;z-index:30;
-    display:flex;align-items:center;gap:8px
-  }
-  .cart-fab .badge{
-    background:#292522;color:#fff;border-radius:50%;width:20px;height:20px;
-    display:inline-flex;align-items:center;justify-content:center;font-size:11px
-  }
   .wa-fab{
     position:fixed;left:20px;bottom:20px;background:var(--green);color:#fff;border:0;
     border-radius:50%;width:50px;height:50px;font-size:21px;cursor:pointer;z-index:30;
@@ -248,6 +238,12 @@
   .footer-links{margin-top:10px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
   .footer-links a{color:var(--ink-soft);text-decoration:none;font-size:11.5px}
   .footer-links a:hover{color:var(--rani)}
+  .footer-order-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+  .footer-order-btn{
+    background:#fff;border:1px solid var(--line);color:var(--ink);border-radius:999px;
+    padding:9px 18px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit
+  }
+  .footer-order-btn:hover{border-color:var(--rani-deep);color:var(--rani-deep)}
 
   @media(max-width:760px){
     .topbar{grid-template-columns:auto 1fr auto;gap:10px}
@@ -280,7 +276,6 @@
     .qty-row .qty-val{font-size:12px}
     .add-btn{font-size:12px;padding:9px 0}
     .wa-fab{left:14px;bottom:14px;width:47px;height:47px}
-    .cart-fab{right:14px;bottom:14px;padding:12px 15px}
     .field-row{flex-direction:column;gap:12px}
   }
 </style>
@@ -325,9 +320,7 @@
 
 <div class="trust-row">
   <div class="trust-card">🧵 <b>100% Handmade</b><span>Hand block-printed in Jaipur</span></div>
-  <div class="trust-card">🚚 <b>Pan-India Shipping</b><span>Free above ₹1000</span></div>
   <div class="trust-card">🔒 <b>Secure Checkout</b><span>COD or online payment</span></div>
-  <div class="trust-card">🧾 <b>GST Invoice</b><span>On every order</span></div>
 </div>
 
 <div class="filters" id="filters"></div>
@@ -338,6 +331,10 @@
 
 <footer>
   Rangrez, Jaipur · Prices include GST · Orders confirmed on WhatsApp before dispatch.
+  <div class="footer-order-actions">
+    <button class="footer-order-btn" onclick="openTrackModal('track')">📦 Track Order</button>
+    <button class="footer-order-btn" onclick="openTrackModal('cancel')">❌ Cancel Order</button>
+  </div>
   <div class="footer-links">
     <a href="privacy-policy.html">Privacy Policy</a>
     <a href="terms.html">Terms &amp; Conditions</a>
@@ -347,9 +344,6 @@
   </div>
 </footer>
 
-<button class="cart-fab" onclick="toggleDrawer(true)">
-  🛒 Cart <span class="badge" id="cartCount">0</span>
-</button>
 <a class="wa-fab" id="waFab" href="#" target="_blank" title="Chat on WhatsApp">💬</a>
 
 <div class="overlay" id="overlay" onclick="closeAll()"></div>
@@ -439,7 +433,7 @@
 </div>
 
 <div class="modal" id="trackModal">
-  <div class="modal-head"><h2>Track / Cancel Order</h2></div>
+  <div class="modal-head"><h2 id="trackModalTitle">Track / Cancel Order</h2></div>
   <div class="modal-body">
     <div class="field"><label>Phone Number used for the order *</label><input id="trackPhone" type="tel" maxlength="10"></div>
     <div class="field"><label>Order ID *</label><input id="trackOrderId" type="text" placeholder="e.g. RGZ12345678"></div>
@@ -868,7 +862,6 @@ function applyCoupon(){
 
 function renderCart(){
   const ids = Object.keys(cart).filter(id => cart[id] > 0);
-  document.getElementById('cartCount').textContent = ids.length;
   document.getElementById('cartCount2').textContent = ids.length;
   const itemsEl = document.getElementById('drawerItems');
   if(ids.length === 0){
@@ -1190,12 +1183,14 @@ function submitOrder(){
 }
 
 /* ---------- Track / Cancel Order ---------- */
-function openTrackModal(){
+function openTrackModal(intent){
   document.getElementById('trackPhone').value = '';
   document.getElementById('trackOrderId').value = '';
   document.getElementById('trackMsg').textContent = '';
   document.getElementById('trackMsg').className = 'track-msg';
   document.getElementById('trackResultBox').innerHTML = '';
+  document.getElementById('trackModalTitle').textContent =
+    intent === 'cancel' ? 'Cancel Order' : intent === 'track' ? 'Track Order' : 'Track / Cancel Order';
   document.getElementById('trackModal').classList.add('open');
   document.getElementById('overlay').classList.add('open');
 }
