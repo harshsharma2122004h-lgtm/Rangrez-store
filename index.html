@@ -719,10 +719,18 @@ function getStock(id){ return stockLevels[id] !== undefined ? stockLevels[id] : 
 function decrementStock(items){
   items.forEach(it => { stockLevels[it.id] = Math.max(0, getStock(it.id) - it.qty); });
   saveStock();
+  items.forEach(it => {
+    sb.rpc('decrement_stock', { p_sku: it.sku, p_qty: it.qty })
+      .then(({ error }) => { if(error) console.warn('Stock sync (decrement) failed for', it.sku, error.message); });
+  });
 }
 function restoreStock(items){
   items.forEach(it => { stockLevels[it.id] = getStock(it.id) + it.qty; });
   saveStock();
+  items.forEach(it => {
+    sb.rpc('increment_stock', { p_sku: it.sku, p_qty: it.qty })
+      .then(({ error }) => { if(error) console.warn('Stock sync (increment) failed for', it.sku, error.message); });
+  });
 }
 
 /* ---------- Orders (per-browser order history, for tracking/cancellation) ---------- */
@@ -1155,26 +1163,50 @@ function submitOrder(){
   const fullAddress = `${o.address}, ${o.city}, ${o.state} - ${o.pincode}`;
 
   if(payMode === 'online'){
-    const rzp = new Razorpay({
-      key: SHOP.razorpayKeyId,
-      amount: o.total * 100, // paise
-      currency: "INR",
-      name: SHOP.name,
-      description: "Rangrez order payment",
-      prefill: { name: o.name, contact: o.phone },
-      theme: { color: "#A6234B" },
-      handler: function(response){
-        const summary = buildSummary(orderId, o, response.razorpay_payment_id, 'online');
-        document.getElementById('confirmTitle').textContent = "Payment received! 🎉";
-        document.getElementById('confirmText').textContent = "Thank you — your payment is confirmed. Rangrez will message you on WhatsApp with delivery details.";
-        sendShopEmail(`New Order ${orderId} — ${o.name} (${fmt(o.total)})`, summary, o.name, o.phone, fullAddress);
-        finishOrder(orderId, summary, o, response.razorpay_payment_id, 'online');
-      },
-      modal: {
-        ondismiss: function(){ /* user closed payment popup without paying */ }
+    document.getElementById('checkoutBtn').disabled = true;
+    createRazorpayOrder(Math.round(o.total * 100), orderId).then(function(rpOrder){
+      document.getElementById('checkoutBtn').disabled = false;
+      if(!rpOrder){
+        alert("Payment shuru nahi ho paya (server order create nahi hua). Thodi der baad try karein ya COD chunein.");
+        return;
       }
+      const rzp = new Razorpay({
+        key: SHOP.razorpayKeyId,
+        amount: rpOrder.amount,
+        currency: rpOrder.currency,
+        order_id: rpOrder.order_id,
+        name: SHOP.name,
+        description: "Rangrez order payment",
+        prefill: { name: o.name, contact: o.phone },
+        theme: { color: "#A6234B" },
+        handler: async function(response){
+          document.getElementById('checkoutModal').classList.remove('open');
+          document.getElementById('confirmTitle').textContent = "Verifying payment…";
+          document.getElementById('confirmText').textContent = "Ek second — payment confirm kar rahe hain.";
+          document.getElementById('confirmOrderId').textContent = '';
+          document.getElementById('confirmModal').classList.add('open');
+
+          const verified = await verifyRazorpayPayment(response);
+          if(!verified){
+            document.getElementById('confirmTitle').textContent = "Payment verify nahi ho paya";
+            document.getElementById('confirmText').textContent = "Agar paise kat gaye hain to WhatsApp par ye Payment ID bhejein, hum manually check karke order confirm kar denge.";
+            document.getElementById('confirmOrderId').textContent = `Payment ID: ${response.razorpay_payment_id}`;
+            document.getElementById('confirmWaLink').href = `https://wa.me/${SHOP.phone}?text=${encodeURIComponent('Payment ID: ' + response.razorpay_payment_id + ' — order ' + orderId + ', please verify.')}`;
+            return;
+          }
+
+          const summary = buildSummary(orderId, o, response.razorpay_payment_id, 'online');
+          document.getElementById('confirmTitle').textContent = "Payment received! 🎉";
+          document.getElementById('confirmText').textContent = "Thank you — your payment is confirmed. Rangrez will message you on WhatsApp with delivery details.";
+          sendShopEmail(`New Order ${orderId} — ${o.name} (${fmt(o.total)})`, summary, o.name, o.phone, fullAddress);
+          finishOrder(orderId, summary, o, response.razorpay_payment_id, 'online');
+        },
+        modal: {
+          ondismiss: function(){ /* user closed payment popup without paying */ }
+        }
+      });
+      rzp.open();
     });
-    rzp.open();
   } else {
     const summary = buildSummary(orderId, o, null, 'cod');
     document.getElementById('confirmTitle').textContent = "Order placed! 🎉";
@@ -1182,6 +1214,32 @@ function submitOrder(){
     sendShopEmail(`New Order ${orderId} — ${o.name} (${fmt(o.total)})`, summary, o.name, o.phone, fullAddress);
     finishOrder(orderId, summary, o, null, 'cod');
   }
+}
+
+/* ---------- Razorpay: order creation + signature verification via Edge Function ---------- */
+async function createRazorpayOrder(amountPaise, receipt){
+  try{
+    const { data, error } = await sb.functions.invoke('razorpay', {
+      body: { action: 'create_order', amount: amountPaise, receipt: receipt }
+    });
+    if(error || !data || !data.order_id){ console.warn("Could not create Razorpay order:", error && error.message, data); return null; }
+    return data;
+  }catch(e){ console.warn("Create Razorpay order failed:", e); return null; }
+}
+
+async function verifyRazorpayPayment(response){
+  try{
+    const { data, error } = await sb.functions.invoke('razorpay', {
+      body: {
+        action: 'verify',
+        razorpay_order_id: response.razorpay_order_id,
+        razorpay_payment_id: response.razorpay_payment_id,
+        razorpay_signature: response.razorpay_signature,
+      }
+    });
+    if(error){ console.warn("Verify payment call failed:", error.message); return false; }
+    return !!(data && data.verified);
+  }catch(e){ console.warn("Verify payment failed:", e); return false; }
 }
 
 /* ---------- Track / Cancel Order ---------- */
