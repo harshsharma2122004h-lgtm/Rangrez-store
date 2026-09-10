@@ -241,7 +241,7 @@
   .track-result{background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:14px 16px;margin-top:6px;font-size:13px}
   .track-result .t-row{display:flex;justify-content:space-between;padding:3px 0;color:var(--ink-soft)}
   .track-result .t-status{font-weight:700;margin-top:6px}
-  .track-result .t-status.confirmed{color:var(--green)} .track-result .t-status.cancelled{color:var(--rani-deep)}
+  .track-result .t-status.confirmed{color:var(--green)} .track-result .t-status.cancelled{color:var(--rani-deep)} .track-result .t-status.pending_payment{color:#B8860B}
   .track-msg{font-size:12.5px;margin-top:6px}.track-msg.err{color:var(--rani-deep)}
   .cancel-btn{background:var(--rani-deep);color:#fff;border:0;padding:11px 0;width:100%;font-weight:700;font-size:14px;cursor:pointer;margin-top:12px}
   footer{padding:26px 5vw;text-align:center;color:var(--ink-soft);font-size:11.5px;border-top:1px solid var(--line);margin-top:8px;background:#fff}
@@ -419,10 +419,8 @@
       <label>Payment method</label>
       <div class="pay-options">
         <div class="pay-opt active" id="opt-cod" onclick="setPayMode('cod')">Cash on Delivery</div>
-        <div class="pay-opt" id="opt-upi" onclick="setPayMode('upi')">Pay via UPI (PhonePe/GPay/Paytm)</div>
         <div class="pay-opt" id="opt-online" onclick="setPayMode('online')">Pay Online Now</div>
       </div>
-      <div class="summary-note" id="upiHelpNote" style="display:none;">Tap "Confirm Order" to open your UPI app (PhonePe, Google Pay, Paytm, etc.) with the amount pre-filled. Complete the payment there, then come back — your order is recorded once you confirm.</div>
     </div>
 
     <button class="primary-btn" id="checkoutBtn" onclick="submitOrder()">Confirm Order</button>
@@ -468,7 +466,7 @@ const SHOP = {
   phone: "917742057696",                          // WhatsApp number, country code, no + or spaces
   ownerEmail: "harshsharma2122004h@gmail.com",     // orders are emailed here via Web3Forms
   web3formsKey: "6a1db584-78a6-43af-8b28-414d69dc65da", // Web3Forms access key
-  razorpayKeyId: "rzp_test_XXXXXXXXXXXXXX",        // replace with YOUR Razorpay Key ID (see note below)
+  razorpayKeyId: "rzp_live_Ta7rTya27HPnJ0",        // your Razorpay Key ID
   upiId: "7742057696@ybl",                          // your PhonePe/GPay/Paytm UPI ID — no Razorpay/KYC needed for this
   freeShippingAbove: 1000,
   shippingInState: 99,   // shipping cost within Rajasthan, when below free-shipping threshold
@@ -608,22 +606,16 @@ const SHOP = {
    Access Key" — you get the key instantly, no account/password needed.
    Paste it above. No confirmation-email click required, unlike before. */
 
-/* Razorpay note: razorpayKeyId must be replaced with your own Key ID from
-   your Razorpay Dashboard (Settings > API Keys). Signing up for Razorpay,
-   completing KYC, and generating this key is something only you can do —
-   it's tied to your bank account and business identity. Test key (rzp_test_...)
-   works immediately after signup for trying it out; the live key (rzp_live_...)
-   activates after Razorpay approves your KYC. */
-
-/* UPI note: upiId is just YOUR OWN UPI address — the same one you'd give
-   anyone to receive money directly (e.g. rangrez@ybl, or 9876543210@paytm).
-   No signup, no KYC, no approval wait — get it from any UPI app
-   (PhonePe/GPay/Paytm/BHIM) under "My QR code" or "Profile". Once you
-   paste your real ID in, the "Pay via UPI" option appears automatically
-   at checkout and opens the customer's UPI app with the amount filled in.
-   This is NOT a payment gateway — there's no automatic verification, so
-   check your UPI app / bank SMS to confirm the money actually came in
-   before dispatching an order marked "PAID VIA UPI". */
+/* Razorpay note: razorpayKeyId is your live Key ID from Razorpay Dashboard
+   (Settings > API Keys). Only the Key ID goes here — it's safe to be public,
+   it's what Razorpay Checkout uses to identify your account in the browser.
+   Your Key SECRET is a different, private credential — it must NEVER be put
+   in this file or anywhere in the website's code. This site is static
+   (no backend server), so the Key Secret isn't needed here at all; keep it
+   only inside your Razorpay Dashboard. Razorpay Checkout already offers UPI
+   as a payment method inside its own popup (in addition to cards/netbanking),
+   with real payment verification — so a separate raw UPI deep-link option
+   is not needed and has been removed. */
 /* ========================================================= */
 
 let products = [
@@ -968,12 +960,9 @@ function closeAll(){
 function setPayMode(mode){
   payMode = mode;
   document.getElementById('opt-cod').classList.toggle('active', mode==='cod');
-  document.getElementById('opt-upi').classList.toggle('active', mode==='upi');
   document.getElementById('opt-online').classList.toggle('active', mode==='online');
-  document.getElementById('upiHelpNote').style.display = mode==='upi' ? 'block' : 'none';
   document.getElementById('checkoutBtn').textContent =
-    mode==='online' ? 'Pay & Confirm Order' :
-    mode==='upi' ? 'Open UPI App & Confirm' : 'Confirm Order';
+    mode==='online' ? 'Pay & Confirm Order' : 'Confirm Order';
 }
 
 /* ---------- State / City selects ---------- */
@@ -1120,8 +1109,8 @@ async function fetchSheetData(){
   }catch(e){ console.warn("Could not load product sheet, showing placeholder products:", e); }
 }
 
-function finishOrder(orderId, summary, o, paymentId, mode){
-  // decrement stock now that the order is confirmed
+function finishOrder(orderId, summary, o, paymentId, mode, status){
+  // decrement stock now that the order is placed
   decrementStock(o.items);
 
   // save order record locally so the customer can track/cancel it later
@@ -1131,7 +1120,7 @@ function finishOrder(orderId, summary, o, paymentId, mode){
     address: o.address, note: o.note, items: o.items, subtotal: o.subtotal, discount: o.discount,
     couponCode: appliedCoupon, shipping: o.shipping, total: o.total, gst: o.gst,
     paymentMode: mode || (paymentId ? 'online' : 'cod'), paymentId: paymentId || null,
-    status: 'confirmed', createdAt: new Date().toISOString(),
+    status: status || 'confirmed', createdAt: new Date().toISOString(),
   });
   saveOrders(orders);
 
@@ -1140,7 +1129,8 @@ function finishOrder(orderId, summary, o, paymentId, mode){
     action: 'order', orderId, name: o.name, phone: o.phone, email: o.email,
     address: `${o.address}, ${o.city}, ${o.state} - ${o.pincode}`,
     items: o.items.map(it => ({ sku: it.sku, qty: it.qty })),
-    total: o.total, paymentMode: paymentId ? 'online' : 'cod',
+    total: o.total, paymentMode: mode || (paymentId ? 'online' : 'cod'),
+    status: status || 'confirmed',
   });
 
   document.getElementById('confirmOrderId').textContent = `Order ID: ${orderId}`;
@@ -1190,17 +1180,6 @@ function submitOrder(){
       }
     });
     rzp.open();
-  } else if(payMode === 'upi'){
-    if(!isConfigured(SHOP.upiId)){ alert("UPI payment abhi set up nahi hai — Rangrez ne apna UPI ID add nahi kiya hai. Cash on Delivery try karein."); return; }
-    // upi:// deep link opens the phone's UPI app chooser (PhonePe/GPay/Paytm/BHIM/etc.)
-    // with the amount and a note pre-filled — no payment gateway or KYC required.
-    const upiLink = `upi://pay?pa=${encodeURIComponent(SHOP.upiId)}&pn=${encodeURIComponent(SHOP.name)}&am=${o.total}&cu=INR&tn=${encodeURIComponent('Order ' + orderId)}`;
-    const summary = buildSummary(orderId, o, null, 'upi');
-    document.getElementById('confirmTitle').textContent = "Order placed! 🎉";
-    document.getElementById('confirmText').textContent = "Your UPI app should have opened to complete the payment. If it didn't, please pay manually and mention your Order ID. Rangrez will confirm on WhatsApp once payment is received.";
-    sendShopEmail(`New Order ${orderId} — ${o.name} (${fmt(o.total)}) — UPI`, summary, o.name, o.phone, fullAddress);
-    finishOrder(orderId, summary, o, null, 'upi');
-    window.location.href = upiLink; // fires after finishOrder so the order is recorded even if the app switch interrupts the page
   } else {
     const summary = buildSummary(orderId, o, null, 'cod');
     document.getElementById('confirmTitle').textContent = "Order placed! 🎉";
@@ -1241,8 +1220,8 @@ function findOrder(){
       <div class="t-row"><span>Placed on</span><span>${new Date(order.createdAt).toLocaleDateString('en-IN')}</span></div>
       ${itemLines}
       <div class="t-row"><span>Total</span><span>${fmt(order.total)}</span></div>
-      <div class="t-status ${order.status}">${order.status === 'confirmed' ? 'Confirmed ✓' : 'Cancelled ✗'}</div>
-      ${order.status === 'confirmed' ? `<button class="cancel-btn" onclick="cancelOrder('${order.orderId}')">Cancel this order</button>` : ''}
+      <div class="t-status ${order.status}">${order.status === 'confirmed' ? 'Confirmed ✓' : order.status === 'pending_payment' ? 'Payment Pending ⏳' : 'Cancelled ✗'}</div>
+      ${(order.status === 'confirmed' || order.status === 'pending_payment') ? `<button class="cancel-btn" onclick="cancelOrder('${order.orderId}')">Cancel this order</button>` : ''}
     </div>
   `;
 }
@@ -1251,7 +1230,7 @@ function cancelOrder(orderId){
   if(!confirm(`Kya aap order ${orderId} cancel karna chahte hain?`)) return;
   const orders = loadOrders();
   const order = orders.find(o => o.orderId === orderId);
-  if(!order || order.status !== 'confirmed') return;
+  if(!order || (order.status !== 'confirmed' && order.status !== 'pending_payment')) return;
 
   order.status = 'cancelled';
   order.cancelledAt = new Date().toISOString();
@@ -1279,7 +1258,6 @@ Customer has cancelled this order via the website.`;
 }
 
 /* ---------- Init ---------- */
-if(!isConfigured(SHOP.upiId)){ document.getElementById('opt-upi').style.display = 'none'; }
 if(isConfigured(SHOP.emailjsPublicKey)){ try{ emailjs.init(SHOP.emailjsPublicKey); }catch(e){ console.warn("EmailJS init failed:", e); } }
 populateStates();
 renderFilters();
@@ -1287,11 +1265,6 @@ renderGrid();
 renderCart();
 fetchSheetData();
 </script>
-
-
-<div id="trial-preview-note" style="position:fixed;left:12px;bottom:12px;z-index:99999;background:#171313;color:#fff;padding:8px 12px;border-radius:999px;font:600 12px/1.2 system-ui,Arial,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.18);opacity:.92">
-  Rangrez UI Trial Preview
-</div>
 
 </body>
 </html>
